@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './Counter.module.css';
 
 interface TCounter {
@@ -10,26 +10,30 @@ interface TCounter {
 
 function Counter(props: TCounter) {
     const { minimum = 0, maximum = 10, plus = 1, minus = 1 } = props;
-    const [counter, setCounter] = useState(minimum);
+    const [count, setCount] = useState(minimum);
+
+    useEffect(() => {
+        document.title = `${count} value`;
+    }, [count]); // only runs when counter changes
 
     function add(n?: number) {
-        const newValue = counter + Math.abs(n || 1);
-        setCounter(newValue > maximum ? maximum : newValue);
+        const newValue = count + Math.abs(n || 1);
+        setCount(newValue > maximum ? maximum : newValue);
     }
 
     function subtract(n?: number) {
-        const newValue = counter - Math.abs(n || 1);
-        setCounter(newValue < minimum ? minimum : newValue);
+        const newValue = count - Math.abs(n || 1);
+        setCount(newValue < minimum ? minimum : newValue);
     }
 
     return (
         <div className={styles.counter}>
             <div className={styles.minimum}>{minimum}</div>
             <div className={styles.maximum}>{maximum}</div>
-            <div className={styles.count}>{counter}</div>
+            <div className={styles.count}>{count}</div>
             <button
                 className={styles.button}
-                disabled={counter <= minimum}
+                disabled={count <= minimum}
                 onClick={() => {
                     subtract(minus);
                 }}
@@ -38,7 +42,7 @@ function Counter(props: TCounter) {
             </button>
             <button
                 className={styles.button}
-                disabled={counter >= maximum}
+                disabled={count >= maximum}
                 onClick={() => {
                     add(plus);
                 }}

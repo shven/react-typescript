@@ -5,6 +5,7 @@ import Counter from './components/Counter';
 import Logo from './components/Logo';
 
 import styles from './App.module.css';
+import CreateCourse from './components/CreateCourse';
 
 function App() {
     return (
@@ -14,6 +15,10 @@ function App() {
                 <Welcome firstName={'John'} lastName={'Doe'} />
             </header>
             <main className={styles.main}>
+                <section>
+                    <h2>CreateCourse</h2>
+                    <CreateCourse />
+                </section>
                 <section>
                     <h2>Counter without props</h2>
                     <Counter />
