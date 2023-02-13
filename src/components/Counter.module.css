@@ -1,0 +1,38 @@
+.counter {
+    position: relative;
+    width: 100%;
+    max-width: 200px;
+    background: aliceblue;
+    border: 1px solid #ccc;
+    padding: var(--gap);
+    margin: 0 auto;
+}
+
+.count {
+    width: 100%;
+    text-align: center;
+    font-size: 4rem;
+}
+
+.button {
+    width: 50%;
+    font-size: 1rem;
+    padding: var(--gap);
+}
+
+.minimum,
+.maximum {
+    position: absolute;
+    font-size: 0.875rem;
+    display: inline-block;
+    opacity: 0.4;
+    top: var(--gap);
+}
+
+.minimum {
+    inset-inline-start: var(--gap);
+}
+
+.maximum {
+    inset-inline-end: var(--gap);
+}
