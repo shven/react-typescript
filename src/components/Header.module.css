@@ -1,0 +1,13 @@
+.header {
+    background: lightblue;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--gap);
+}
+
+.header__actions {
+    display: flex;
+    gap: var(--gap);
+}

@@ -6,15 +6,16 @@ import Logo from './components/Logo';
 
 import styles from './App.module.css';
 import CreateCourse from './components/CreateCourse';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import Courses from './components/Courses';
 
 function App() {
     return (
         <div className={styles.app}>
-            <header className={styles.header}>
-                <Logo />
-                <Welcome firstName={'John'} lastName={'Doe'} />
-            </header>
-            <main className={styles.main}>
+            <Header />
+            <main>
+                <Courses />
                 <section>
                     <h2>CreateCourse</h2>
                     <CreateCourse />
@@ -28,7 +29,7 @@ function App() {
                     <Counter minimum={-20} maximum={20} minus={3} plus={3} />
                 </section>
             </main>
-            <footer className={styles.footer}>&copy; Footer text</footer>
+            <Footer />
         </div>
     );
 }

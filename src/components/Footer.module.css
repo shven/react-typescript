@@ -1,0 +1,6 @@
+.footer {
+    margin-top: auto;
+    background: #333333;
+    color: white;
+    padding: var(--gap);
+}

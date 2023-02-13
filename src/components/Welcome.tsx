@@ -1,7 +1,6 @@
 import React from 'react';
-import { TUser } from '../types/TUser';
-
 import styles from './Welcome.module.css';
+import { TUser } from '../types';
 
 function Welcome(props: TUser) {
     function formatUser(user: TUser) {
