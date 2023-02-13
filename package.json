@@ -19,9 +19,12 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "test:nowatch": "react-scripts test --watchAll=false",
     "eject": "react-scripts eject",
-    "eslint": "eslint --ext .js --ext .jsx ./src/**/*",
-    "eslint:fix": "eslint --fix --ext .js --ext .tsx ./src/**/*"
+    "eslint": "eslint --ext .js --ext .jsx 'src'",
+    "eslint:fix": "eslint --fix --ext .ts --ext .tsx 'src'",
+    "prepare": "husky install",
+    "prepublish": "npm run eslint:fix"
   },
   "eslintConfig": {
     "extends": [
@@ -51,6 +54,7 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-promise": "^6.1.1",
     "eslint-plugin-react": "^7.32.2",
+    "husky": "^8.0.3",
     "prettier": "^2.8.4",
     "typescript": "^4.9.5"
   }
