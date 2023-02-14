@@ -7,7 +7,15 @@
     padding: var(--gap);
 }
 
+.header button {
+    margin: 0;
+}
+
 .header__actions {
     display: flex;
     gap: var(--gap);
+}
+
+.button {
+    margin-bottom: 0;
 }

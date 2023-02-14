@@ -4,7 +4,7 @@
     width: calc(100% * (var(--gap) * 2));
 
     margin: var(--gap);
-    padding: var(--gap);
+    padding: var(--gap) var(--gap) 0 var(--gap);
 }
 
 .content {

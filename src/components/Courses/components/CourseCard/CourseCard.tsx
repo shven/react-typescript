@@ -16,6 +16,7 @@ function CourseCard(course: TCourse) {
                 <h3>{course.title}</h3>
                 <p>{course.description}</p>
                 <Button
+                    variant={'secondary'}
                     text={'Delete course'}
                     onClick={() => {
                         deleteCourse(course.id);

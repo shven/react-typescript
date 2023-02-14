@@ -11,6 +11,7 @@ function Header() {
             <div className={styles.header__actions}>
                 <Welcome firstName={'John'} lastName={'Doe'} />
                 <Button
+                    variant={'secondary'}
                     text={'Logout'}
                     onClick={() => {
                         alert('Logged out');

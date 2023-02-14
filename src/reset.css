@@ -1,0 +1,134 @@
+:root {
+    --gap: 20px;
+    --color-primary: #304c89;
+    --color-primary-light: #648de5;
+    --color-secondary: #700548;
+    --color-secondary-light: #AE1877;
+}
+
+*,
+*:before,
+*:after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#root,
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: sans-serif;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    padding-bottom: var(--gap);
+}
+
+p {
+    padding-bottom: var(--gap);
+}
+
+label {
+    font-width: bold;
+}
+
+button {
+    cursor: pointer;
+    padding: calc(var(--gap) * 0.5) var(--gap);
+    margin-bottom: var(--gap);
+    background: var(--color-primary);
+    border: 1px solid var(--color-primary);
+    color: white;
+    border-radius: 3px;
+    font-size: 1rem;
+    font-weight: 900;
+    letter-spacing: 1px;
+    transition: all 0.15s ease-out;    overflow: visible;
+}
+
+button.secondary {
+    background: var(--color-secondary);
+    border: 1px solid var(--color-secondary);
+}
+
+button:disabled {
+    opacity: 0.2;
+    cursor: not-allowed;
+}
+
+button:not(:disabled):active,
+button:not(:disabled):focus,
+button:not(:disabled):hover {
+    background: var(--color-primary-light);
+}
+
+button.secondary:not(:disabled):active,
+button.secondary:not(:disabled):focus,
+button.secondary:not(:disabled):hover {
+    background: var(--color-secondary-light);
+}
+
+section {
+    padding: calc(var(--gap) * 2) var(--gap) var(--gap) var(--gap);
+    border-top: 1px solid darkgray;
+}
+
+button,
+select {
+    text-transform: none;
+}
+
+button,
+html input[type='button'],
+input[type='reset'],
+input[type='submit'] {
+    -webkit-appearance: button;
+    cursor: pointer;
+}
+
+button[disabled],
+html input[disabled] {
+    cursor: default;
+}
+
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+    height: auto;
+}
+
+textarea {
+    overflow: auto;
+}
+
+select,
+textarea,
+input[type='text'],
+input[type='date'],
+input[type='email'],
+input[type='number'],
+input[type='text']{
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #999;
+    width: 100%;
+    max-width: 300px;
+    font-family: inherit;
+}
+
+textarea {
+    min-height: 100px;
+}

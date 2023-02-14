@@ -4,8 +4,8 @@
     max-width: 200px;
     background: aliceblue;
     border: 1px solid #ccc;
-    padding: var(--gap);
-    margin: 0 auto;
+    padding: var(--gap) var(--gap) 0 var(--gap);
+    margin: 0 auto var(--gap);
 }
 
 .count {

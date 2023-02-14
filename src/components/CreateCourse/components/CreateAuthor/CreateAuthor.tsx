@@ -33,7 +33,7 @@ function CreateAuthor() {
         <form onSubmit={handleFormSubmit}>
             <p>
                 <label>
-                    Title
+                    Name
                     <br />
                     <input
                         type={'text'}
