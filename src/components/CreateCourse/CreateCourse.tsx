@@ -109,11 +109,13 @@ function CreateCourse() {
                         setCourseAuthors(authors);
                     }}
                 >
-                    {authors.map((author) => (
-                        <option value={author.id} key={author.id}>
-                            {author.name}
-                        </option>
-                    ))}
+                    {authors
+                        .sort((a, b) => a.name.localeCompare(b.name))
+                        .map((author) => (
+                            <option value={author.id} key={author.id}>
+                                {author.name}
+                            </option>
+                        ))}
                 </select>
             </p>
             <button type='submit'>Create course</button>
