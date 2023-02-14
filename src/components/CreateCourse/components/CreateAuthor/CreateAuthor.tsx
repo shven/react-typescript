@@ -6,7 +6,7 @@ import getRandomString from '../../../../helpers/getRandomString';
 const forbiddenSymbols = /[@#$%^&]/;
 
 function CreateAuthor() {
-    const { saveAuthor } = React.useContext(AuthorContext) as TAuthorContext;
+    const { authors, saveAuthor } = React.useContext(AuthorContext) as TAuthorContext;
 
     const [name, setName] = useState('');
 
@@ -18,7 +18,12 @@ function CreateAuthor() {
             name
         };
 
-        saveAuthor(author);
+        // save author and avoid duplicates
+        const authorExists = authors.some((a) => a.name === author.name);
+        const confirmed = authorExists && confirm(`Author "${author.name}" already exists, are you sure you'd like to add the same author name with a different id?`);
+        if (confirmed || !authorExists) {
+            saveAuthor(author);
+        }
 
         // reset form
         setName('');
