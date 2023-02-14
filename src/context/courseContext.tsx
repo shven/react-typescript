@@ -30,7 +30,8 @@ const CourseProvider: React.FC<Props> = ({ children }) => {
             title: course.title,
             description: course.description,
             creationDate: course.creationDate,
-            duration: course.duration
+            duration: course.duration,
+            authors: course.authors
         };
         setCourses([...courses, newCourse]);
     };
