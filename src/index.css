@@ -38,6 +38,10 @@ p {
     padding-bottom: var(--gap);
 }
 
+label {
+    font-width: bold;
+}
+
 button {
     cursor: pointer;
 }

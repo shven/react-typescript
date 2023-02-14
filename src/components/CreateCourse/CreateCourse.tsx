@@ -33,6 +33,7 @@ function CreateCourse() {
             <p>
                 <label>
                     Title
+                    <br />
                     <input
                         type={'text'}
                         required={true}
@@ -48,21 +49,23 @@ function CreateCourse() {
             <p>
                 <label>
                     Description
-                    <input
-                        type={'text'}
+                    <br />
+                    <textarea
                         required={true}
-                        value={description}
                         onChange={(e) => {
                             if (!forbiddenSymbols.test(e.target.value)) {
                                 setDescription(e.target.value);
                             }
                         }}
-                    />
+                    >
+                        {description}
+                    </textarea>
                 </label>
             </p>
             <p>
                 <label>
                     Creation date
+                    <br />
                     <input
                         required={true}
                         type={'date'}
@@ -77,7 +80,8 @@ function CreateCourse() {
             </p>
             <p>
                 <label>
-                    Duration
+                    Duration in minutes
+                    <br />
                     <input
                         required={true}
                         type={'number'}
