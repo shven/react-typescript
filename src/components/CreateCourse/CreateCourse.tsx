@@ -57,9 +57,8 @@ function CreateCourse() {
                                 setDescription(e.target.value);
                             }
                         }}
-                    >
-                        {description}
-                    </textarea>
+                        value={description}
+                    />
                 </label>
             </p>
             <p>
