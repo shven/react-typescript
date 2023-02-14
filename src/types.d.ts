@@ -14,5 +14,5 @@ export interface TCourse {
     description: string;
     creationDate: string;
     duration: number;
-    authors: string[];
+    authors?: string[];
 }
