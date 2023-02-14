@@ -1,6 +1,6 @@
 import React from 'react';
-import { mockedCoursesList } from '../constants';
-import CourseCard from './CourseCard';
+import { mockedCoursesList } from '../../constants';
+import CourseCard from './components/CourseCard/CourseCard';
 
 function Courses() {
     const courses = mockedCoursesList.map((course) => (

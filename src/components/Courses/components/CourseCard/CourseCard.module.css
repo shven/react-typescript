@@ -11,12 +11,12 @@
     flex: 1
 }
 
-.aside {
-    width: 30%;
-}
-
 @media (min-width: 1000px) {
     .root {
         display: flex;
+    }
+
+    .aside {
+        width: 30%;
     }
 }

@@ -1,8 +1,8 @@
 import styles from './Header.module.css';
-import Logo from './Logo';
-import Welcome from './Welcome';
 import React from 'react';
-import Button from './Button';
+import Logo from './components/Logo/Logo';
+import Welcome from '../Welcome/Welcome';
+import Button from '../../common/Button/Button';
 
 function Header() {
     return (

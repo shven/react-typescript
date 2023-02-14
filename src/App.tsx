@@ -1,14 +1,11 @@
 import React from 'react';
 import './App.css';
-import Welcome from './components/Welcome';
-import Counter from './components/Counter';
-import Logo from './components/Logo';
-
+import Counter from './components/Counter/Counter';
 import styles from './App.module.css';
-import CreateCourse from './components/CreateCourse';
-import Header from './components/Header';
-import Footer from './components/Footer';
-import Courses from './components/Courses';
+import CreateCourse from './components/CreateCourse/CreateCourse';
+import Footer from './components/Footer/Footer';
+import Courses from './components/Courses/Courses';
+import Header from './components/Header/Header';
 
 function App() {
     return (
