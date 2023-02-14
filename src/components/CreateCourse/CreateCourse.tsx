@@ -110,7 +110,9 @@ function CreateCourse() {
                     }}
                 >
                     {authors.map((author) => (
-                        <option value={author.id}>{author.name}</option>
+                        <option value={author.id} key={author.id}>
+                            {author.name}
+                        </option>
                     ))}
                 </select>
             </p>
