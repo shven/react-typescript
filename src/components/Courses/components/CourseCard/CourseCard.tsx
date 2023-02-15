@@ -6,9 +6,11 @@ import getCourseDuration from '../../../../helpers/getCourseDuration';
 import formatCreationDate from '../../../../helpers/formatCreationDate';
 import formatAuthorsByIds from '../../../../helpers/formatAuthorsByIds';
 import { CourseContext, TCourseContext } from '../../../../context/courseContext';
+import { AuthorContext, TAuthorContext } from '../../../../context/authorContext';
 
 function CourseCard(course: TCourse) {
     const { deleteCourse } = React.useContext(CourseContext) as TCourseContext;
+    const { authors } = React.useContext(AuthorContext) as TAuthorContext;
 
     return (
         <div className={styles.root}>
@@ -26,7 +28,7 @@ function CourseCard(course: TCourse) {
             <div className={styles.aside}>
                 {course.authors && (
                     <p>
-                        <strong>Authors:</strong> {formatAuthorsByIds(course.authors)}
+                        <strong>Authors:</strong> {formatAuthorsByIds(course.authors, authors)}
                     </p>
                 )}
 

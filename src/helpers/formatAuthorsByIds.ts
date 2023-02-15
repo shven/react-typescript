@@ -1,6 +1,6 @@
-import { mockedAuthorsList } from '../constants';
+import { TAuthor } from '../types';
 
-export default (id: string | string[]): string => {
+export default (id: string | string[], allAuthors: TAuthor[]): string => {
     const authorNames: string[] = [];
 
     if (typeof id === 'string') {
@@ -9,7 +9,7 @@ export default (id: string | string[]): string => {
 
     if (Array.isArray(id)) {
         id.forEach((id) => {
-            const name = mockedAuthorsList.find((author) => author.id === id)?.name;
+            const name = allAuthors.find((author) => author.id === id)?.name;
             if (name) {
                 authorNames.push(name);
             }
