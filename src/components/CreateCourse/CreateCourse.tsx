@@ -3,13 +3,14 @@ import { TCourse } from '../../types';
 import React, { useState } from 'react';
 import { CourseContext, TCourseContext } from '../../context/courseContext';
 import { AuthorContext, TAuthorContext } from '../../context/authorContext';
+import { useNavigate } from 'react-router-dom';
 
 const forbiddenSymbols = /[@#$%^&]/;
 
 function CreateCourse() {
+    const navigate = useNavigate();
     const { saveCourse } = React.useContext(CourseContext) as TCourseContext;
     const { authors } = React.useContext(AuthorContext) as TAuthorContext;
-
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [creationDate, setCreationDate] = useState('');
@@ -28,6 +29,7 @@ function CreateCourse() {
         };
 
         saveCourse(course);
+        navigate('/courses');
     }
 
     return (

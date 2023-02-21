@@ -1,8 +1,12 @@
-.welcome {
+.root {
     padding: calc(0.5 * var(--gap));
     border-radius: 8px;
-    background: #333;
-    color: white;
+    color: black;
     display: flex;align-items: center;
     justify-content: center;
+}
+
+.link {
+    color: inherit;
+    text-decoration: none;
 }

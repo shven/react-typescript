@@ -2,12 +2,13 @@ import React, { useState } from 'react';
 import { AuthorContext, TAuthorContext } from '../../../../context/authorContext';
 import { TAuthor } from '../../../../types';
 import getRandomString from '../../../../helpers/getRandomString';
+import { useNavigate } from 'react-router-dom';
 
 const forbiddenSymbols = /[@#$%^&]/;
 
 function CreateAuthor() {
     const { authors, saveAuthor } = React.useContext(AuthorContext) as TAuthorContext;
-
+    const navigate = useNavigate();
     const [name, setName] = useState('');
 
     function handleFormSubmit(e: React.SyntheticEvent) {
@@ -23,6 +24,8 @@ function CreateAuthor() {
         const confirmed = authorExists && confirm(`Author "${author.name}" already exists, are you sure you'd like to add the same author name with a different id?`);
         if (confirmed || !authorExists) {
             saveAuthor(author);
+            // navigate (redirect) to courses form after adding a new author
+            navigate('/courses/add', { replace: true });
         }
 
         // reset form

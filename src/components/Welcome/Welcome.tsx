@@ -1,13 +1,15 @@
 import React from 'react';
 import styles from './Welcome.module.css';
-import { TUser } from '../../types';
+import { Link } from 'react-router-dom';
 
-function Welcome(props: TUser) {
-    function formatUser(user: TUser) {
-        return `Hello ${user.firstName} ${user.lastName}`;
-    }
-
-    return <div className={styles.welcome}>{formatUser(props)}</div>;
+function Welcome(props: { name: string }) {
+    return (
+        <div className={styles.root}>
+            <Link to={'/user'} className={styles.link}>
+                {props.name}
+            </Link>
+        </div>
+    );
 }
 
 export default Welcome;

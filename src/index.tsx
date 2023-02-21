@@ -3,12 +3,40 @@ import ReactDOM from 'react-dom/client';
 import './reset.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
+import CounterPage from './pages/CounterPage';
+import CoursesPage from './pages/CoursesPage';
+import CoursesDetailPage from './pages/Courses/CoursesDetail';
+import CoursesAllPage from './pages/Courses/CoursesAllPage';
+import CoursesAdd from './pages/Courses/CoursesAddPage';
+import CoursesAddAuthorPage from './pages/Courses/CoursesAddAuthorPage';
+import RegisterPage from './pages/RegistrationPage';
+import LoginPage from './pages/LoginPage';
+import UserPage from './pages/UserPage';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
 root.render(
     <React.StrictMode>
-        <App />
+        <BrowserRouter>
+            <Routes>
+                <Route path='/' element={<App />}>
+                    <Route path='registration' element={<RegisterPage />} />
+                    <Route path='login' element={<LoginPage />} />
+                    <Route path='user' element={<UserPage />} />
+
+                    <Route path='courses' element={<CoursesPage />}>
+                        <Route index element={<CoursesAllPage />} />
+                        <Route path='add' element={<CoursesAdd />} />
+                        <Route path='add-author' element={<CoursesAddAuthorPage />} />
+                        <Route path=':pageId' element={<CoursesDetailPage />} />
+                    </Route>
+
+                    <Route path='counter' element={<CounterPage />} />
+                    <Route path='*' element={<Navigate to='/' />} />
+                </Route>
+            </Routes>
+        </BrowserRouter>
     </React.StrictMode>
 );
 

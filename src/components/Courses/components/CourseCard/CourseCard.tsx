@@ -7,6 +7,7 @@ import formatCreationDate from '../../../../helpers/formatCreationDate';
 import formatAuthorsByIds from '../../../../helpers/formatAuthorsByIds';
 import { CourseContext, TCourseContext } from '../../../../context/courseContext';
 import { AuthorContext, TAuthorContext } from '../../../../context/authorContext';
+import { Link } from 'react-router-dom';
 
 function CourseCard(course: TCourse) {
     const { deleteCourse } = React.useContext(CourseContext) as TCourseContext;
@@ -38,12 +39,7 @@ function CourseCard(course: TCourse) {
                 <p>
                     <strong>Created:</strong> {formatCreationDate(course.creationDate)}
                 </p>
-                <Button
-                    text={'Show course'}
-                    onClick={() => {
-                        alert('show course');
-                    }}
-                />
+                <Link to={`/courses/${course.id}`}>Show course</Link>
             </div>
         </div>
     );

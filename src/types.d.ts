@@ -1,6 +1,6 @@
 export interface TUser {
-    firstName: string;
-    lastName: string;
+    email: string;
+    name: string;
 }
 
 export interface TAuthor {
