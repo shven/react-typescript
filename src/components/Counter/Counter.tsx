@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styles from './Counter.module.css';
 
 interface TCounter {
@@ -11,10 +11,6 @@ interface TCounter {
 function Counter(props: TCounter) {
     const { minimum = 0, maximum = 10, plus = 1, minus = 1 } = props;
     const [count, setCount] = useState(minimum);
-
-    useEffect(() => {
-        document.title = `${count} value`;
-    }, [count]); // only runs when counter changes
 
     function add(n?: number) {
         const newValue = count + Math.abs(n || 1);

@@ -7,11 +7,9 @@ function CoursesPage() {
     const { isLoggedIn } = React.useContext(UserContext) as TUserContext;
 
     useEffect(() => {
-        return () => {
-            if (!isLoggedIn) {
-                navigate('/login');
-            }
-        };
+        if (!isLoggedIn) {
+            navigate('/login');
+        }
     }, []);
 
     return (
