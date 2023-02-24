@@ -13,30 +13,34 @@ import CoursesAddAuthorPage from './pages/Courses/CoursesAddAuthorPage';
 import RegisterPage from './pages/RegistrationPage';
 import LoginPage from './pages/LoginPage';
 import UserPage from './pages/UserPage';
+import { Provider } from 'react-redux';
+import { store } from './app/store';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
 root.render(
     <React.StrictMode>
-        <BrowserRouter>
-            <Routes>
-                <Route path='/' element={<App />}>
-                    <Route path='registration' element={<RegisterPage />} />
-                    <Route path='login' element={<LoginPage />} />
-                    <Route path='user' element={<UserPage />} />
+        <Provider store={store}>
+            <BrowserRouter>
+                <Routes>
+                    <Route path='/' element={<App />}>
+                        <Route path='registration' element={<RegisterPage />} />
+                        <Route path='login' element={<LoginPage />} />
+                        <Route path='user' element={<UserPage />} />
 
-                    <Route path='courses' element={<CoursesPage />}>
-                        <Route index element={<CoursesAllPage />} />
-                        <Route path='add' element={<CoursesAdd />} />
-                        <Route path='add-author' element={<CoursesAddAuthorPage />} />
-                        <Route path=':pageId' element={<CoursesDetailPage />} />
+                        <Route path='courses' element={<CoursesPage />}>
+                            <Route index element={<CoursesAllPage />} />
+                            <Route path='add' element={<CoursesAdd />} />
+                            <Route path='add-author' element={<CoursesAddAuthorPage />} />
+                            <Route path=':pageId' element={<CoursesDetailPage />} />
+                        </Route>
+
+                        <Route path='counter' element={<CounterPage />} />
+                        <Route path='*' element={<Navigate to='/' />} />
                     </Route>
-
-                    <Route path='counter' element={<CounterPage />} />
-                    <Route path='*' element={<Navigate to='/' />} />
-                </Route>
-            </Routes>
-        </BrowserRouter>
+                </Routes>
+            </BrowserRouter>
+        </Provider>
     </React.StrictMode>
 );
 

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { TAuthor } from '../types';
+import type { TAuthor } from '../types';
 import { mockedAuthorsList } from '../constants';
 import getRandomString from '../helpers/getRandomString';
 import { useEffect } from 'react';

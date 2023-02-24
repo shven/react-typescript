@@ -1,4 +1,4 @@
-import { TAuthor } from '../types';
+import type { TAuthor } from '../types';
 
 export default (id: string | string[], allAuthors: TAuthor[]): string => {
     const authorNames: string[] = [];

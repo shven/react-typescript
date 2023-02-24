@@ -1,5 +1,5 @@
 import getRandomString from '../../helpers/getRandomString';
-import { TCourse } from '../../types';
+import type { TCourse } from '../../types';
 import React, { useState } from 'react';
 import { CourseContext, TCourseContext } from '../../context/courseContext';
 import { AuthorContext, TAuthorContext } from '../../context/authorContext';

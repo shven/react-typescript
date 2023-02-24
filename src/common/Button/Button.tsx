@@ -1,9 +1,9 @@
-import React from 'react';
+import type { MouseEventHandler } from 'react';
 
 interface TButton {
     text: string;
     variant?: 'primary' | 'secondary';
-    onClick: React.MouseEventHandler<HTMLButtonElement>;
+    onClick: MouseEventHandler<HTMLButtonElement>;
 }
 
 function Button(props: TButton) {

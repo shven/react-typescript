@@ -1,7 +1,7 @@
 import React from 'react';
 import styles from './CourseCard.module.css';
 import Button from '../../../../common/Button/Button';
-import { TCourse } from '../../../../types';
+import type { TCourse } from '../../../../types';
 import getCourseDuration from '../../../../helpers/getCourseDuration';
 import formatCreationDate from '../../../../helpers/formatCreationDate';
 import formatAuthorsByIds from '../../../../helpers/formatAuthorsByIds';

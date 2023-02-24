@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { AuthorContext, TAuthorContext } from '../../../../context/authorContext';
-import { TAuthor } from '../../../../types';
+import type { TAuthor } from '../../../../types';
 import getRandomString from '../../../../helpers/getRandomString';
 import { useNavigate } from 'react-router-dom';
 

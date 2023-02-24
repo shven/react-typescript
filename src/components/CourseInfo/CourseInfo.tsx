@@ -1,5 +1,5 @@
 import React from 'react';
-import { TCourse } from '../../types';
+import type { TCourse } from '../../types';
 
 export default (props: { course: TCourse }) => {
     return (

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { TUser } from '../types';
+import type { TUser } from '../types';
 import { useEffect } from 'react';
 import { apiUrl } from '../constants';
 

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { TCourse } from '../types';
+import type { TCourse } from '../types';
 import { mockedCoursesList } from '../constants';
 import getRandomString from '../helpers/getRandomString';
 import { useEffect } from 'react';
