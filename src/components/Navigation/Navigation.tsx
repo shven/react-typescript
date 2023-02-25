@@ -10,6 +10,7 @@ function Navigation() {
         <nav className={styles.navigation}>
             <div>
                 <Link to='/'>Home</Link>
+                <Link to='/todos'>Todos</Link>
             </div>
             <div>
                 {isLoggedIn && <Link to='/courses'>Courses</Link>}

@@ -15,6 +15,8 @@ import LoginPage from './pages/LoginPage';
 import UserPage from './pages/UserPage';
 import { Provider } from 'react-redux';
 import { store } from './app/store';
+import TodosPage from './pages/TodosPage';
+import TodoList from './features/Todos/TodoList';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
@@ -27,6 +29,10 @@ root.render(
                         <Route path='registration' element={<RegisterPage />} />
                         <Route path='login' element={<LoginPage />} />
                         <Route path='user' element={<UserPage />} />
+
+                        <Route path='todos' element={<TodosPage />}>
+                            <Route index element={<TodoList />} />
+                        </Route>
 
                         <Route path='courses' element={<CoursesPage />}>
                             <Route index element={<CoursesAllPage />} />
