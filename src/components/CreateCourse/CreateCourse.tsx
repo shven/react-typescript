@@ -1,25 +1,47 @@
 import getRandomString from '../../helpers/getRandomString';
-import type { TCourse } from '../../types';
-import React, { useState } from 'react';
-import { CourseContext, TCourseContext } from '../../context/courseContext';
-import { AuthorContext, TAuthorContext } from '../../context/authorContext';
-import { useNavigate } from 'react-router-dom';
+import type { ICourse } from '../../types';
+import React, { useEffect, useState } from 'react';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { fetchAuthorsAsync, selectAuthorEntities } from '../Authors/authorSlice';
+import { addCourseAsync } from '../Courses/courseSlice';
+import { toast, ToastContainer } from 'react-toastify';
 
 const forbiddenSymbols = /[@#$%^&]/;
 
 function CreateCourse() {
-    const navigate = useNavigate();
-    const { saveCourse } = React.useContext(CourseContext) as TCourseContext;
-    const { authors } = React.useContext(AuthorContext) as TAuthorContext;
+    const dispatch = useAppDispatch();
+    //const navigate = useNavigate();
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [creationDate, setCreationDate] = useState('');
     const [duration, setDuration] = useState(90);
     const [courseAuthors, setCourseAuthors] = useState([] as string[]);
+    const authors = useAppSelector(selectAuthorEntities);
+    const errors = useAppSelector((state) => state.courses.errors);
+    const status = useAppSelector((state) => state.courses.status);
 
-    function handleFormSubmit(e: React.SyntheticEvent) {
+    useEffect(() => {
+        dispatch(fetchAuthorsAsync());
+    }, [dispatch]);
+
+    useEffect(() => {
+        errors?.forEach((error) => {
+            toast.error(error, {
+                position: 'top-center',
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: 'light'
+            });
+        });
+    }, [errors]);
+
+    const handleFormSubmit = (e: React.SyntheticEvent) => {
         e.preventDefault();
-        const course: TCourse = {
+        const course: ICourse = {
             id: getRandomString(),
             title,
             description,
@@ -27,10 +49,8 @@ function CreateCourse() {
             duration,
             authors: courseAuthors
         };
-
-        saveCourse(course);
-        navigate('/courses');
-    }
+        dispatch(addCourseAsync(course));
+    };
 
     return (
         <form onSubmit={handleFormSubmit}>
@@ -39,8 +59,8 @@ function CreateCourse() {
                     Title
                     <br />
                     <input
-                        type={'text'}
                         required={true}
+                        type={'text'}
                         value={title}
                         onChange={(e) => {
                             if (!forbiddenSymbols.test(e.target.value)) {
@@ -107,7 +127,7 @@ function CreateCourse() {
                     multiple={true}
                     onChange={(e) => {
                         const authors = Array.from(e.target.selectedOptions, (option) => option.value);
-                        console.log(authors, 'authors 2');
+                        console.log(authors, 'selected authors');
                         setCourseAuthors(authors);
                     }}
                 >
@@ -120,7 +140,13 @@ function CreateCourse() {
                         ))}
                 </select>
             </p>
+            {errors?.map((error) => (
+                <p key={error}>{error}</p>
+            ))}
+
             <button type='submit'>Create course</button>
+            <div>Status: {status}</div>
+            <ToastContainer />
         </form>
     );
 }

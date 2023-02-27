@@ -78,4 +78,4 @@ export const incrementIfOdd =
         }
     };
 
-export default counterReduxSlice.reducer;
+export default counterReduxSlice;

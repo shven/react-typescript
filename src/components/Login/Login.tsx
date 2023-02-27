@@ -29,24 +29,21 @@ export default () => {
         });
 
         const result = await response.json();
-        console.log(result, 'login result');
-        if (result.errors) {
-            result?.errors.forEach((error: string) => {
-                toast.error(error, {
-                    position: 'top-center',
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: 'light'
-                });
+        result?.errors.forEach((error: string) => {
+            toast.error(error, {
+                position: 'top-center',
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: 'light'
             });
-        }
+        });
         if (result.successful) {
             saveToken(result.result);
-        } else {
+        } else if (!result.submit && !result.errors) {
             toast.error('Make sure the name, email and password fields match the ones used while registering', {
                 position: 'top-center',
                 autoClose: 5000,

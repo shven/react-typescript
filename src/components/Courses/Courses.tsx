@@ -1,22 +1,20 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import CourseCard from './components/CourseCard/CourseCard';
-import { CourseContext, TCourseContext } from '../../context/courseContext';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { fetchCoursesAsync, selectCourseIdsReversed } from './courseSlice';
 
 function Courses() {
-    const { courses } = React.useContext(CourseContext) as TCourseContext;
+    const dispatch = useAppDispatch();
+    const courseIds = useAppSelector(selectCourseIdsReversed);
+
+    useEffect(() => {
+        dispatch(fetchCoursesAsync());
+    }, [dispatch]);
 
     return (
         <div>
-            {courses.map((course) => (
-                <CourseCard
-                    key={course.id}
-                    authors={course.authors}
-                    creationDate={course.creationDate}
-                    title={course.title}
-                    description={course.description}
-                    id={course.id}
-                    duration={course.duration}
-                />
+            {courseIds.map((id) => (
+                <CourseCard key={id} id={id} />
             ))}
         </div>
     );

@@ -1,35 +1,17 @@
 import React, { useState } from 'react';
-import { AuthorContext, TAuthorContext } from '../../../../context/authorContext';
-import type { TAuthor } from '../../../../types';
-import getRandomString from '../../../../helpers/getRandomString';
-import { useNavigate } from 'react-router-dom';
+import { useAppDispatch } from '../../../../app/hooks';
+import { addAuthorsAsync } from '../../../Authors/authorSlice';
 
 const forbiddenSymbols = /[@#$%^&]/;
 
 function CreateAuthor() {
-    const { authors, saveAuthor } = React.useContext(AuthorContext) as TAuthorContext;
-    const navigate = useNavigate();
+    const dispatch = useAppDispatch();
     const [name, setName] = useState('');
 
-    function handleFormSubmit(e: React.SyntheticEvent) {
+    async function handleFormSubmit(e: React.SyntheticEvent) {
         e.preventDefault();
-
-        const author: TAuthor = {
-            id: getRandomString(),
-            name
-        };
-
-        // save author and avoid duplicates
-        const authorExists = authors.some((a) => a.name === author.name);
-        const confirmed = authorExists && confirm(`Author "${author.name}" already exists, are you sure you'd like to add the same author name with a different id?`);
-        if (confirmed || !authorExists) {
-            saveAuthor(author);
-            // navigate (redirect) to courses form after adding a new author
-            navigate('/courses/add', { replace: true });
-        }
-
-        // reset form
-        setName('');
+        const addAuthor = await dispatch(addAuthorsAsync(name));
+        console.log(addAuthor, 'dispatchresponse');
     }
 
     return (

@@ -1,12 +1,12 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
-import { CourseContext, TCourseContext } from '../../context/courseContext';
 import CourseInfo from '../../components/CourseInfo/CourseInfo';
+import { useAppSelector } from '../../app/hooks';
+import { selectCourseById } from '../../components/Courses/courseSlice';
 
 export default () => {
     const params = useParams(); // to get page params
-    const { courses } = React.useContext(CourseContext) as TCourseContext;
-    const course = courses.find((c) => c.id === params.pageId);
+    const course = useAppSelector((state) => selectCourseById(state, params.pageId || ''));
 
     if (!course) {
         alert('course not found, redirect');

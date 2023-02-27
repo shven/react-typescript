@@ -1,6 +1,6 @@
 import React from 'react';
 import Counter from '../components/Counter/Counter';
-import { CounterRedux } from '../features/CounterRedux/CounterRedux';
+import { CounterRedux } from '../components/CounterRedux/CounterRedux';
 
 export default () => {
     return (

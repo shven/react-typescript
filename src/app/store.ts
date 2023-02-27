@@ -1,11 +1,15 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-import counterReducer from '../features/CounterRedux/counterReduxSlice';
-import todosReducer from '../features/Todos/todosSlice';
+import { counterReduxSlice } from '../components/CounterRedux/counterReduxSlice';
+import todosSlice from '../components/Todos/todosSlice';
+import { courseSlice } from '../components/Courses/courseSlice';
+import { authorSlice } from '../components/Authors/authorSlice';
 
 export const store = configureStore({
     reducer: {
-        counter: counterReducer,
-        todos: todosReducer
+        counter: counterReduxSlice.reducer,
+        todos: todosSlice.reducer,
+        courses: courseSlice.reducer,
+        authors: authorSlice.reducer
     }
 });
 

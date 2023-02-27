@@ -1,6 +1,6 @@
-import type { TAuthor } from '../types';
+import type { IAuthor } from '../types';
 
-export default (id: string | string[], allAuthors: TAuthor[]): string => {
+export default (id: string | string[], allAuthors: IAuthor[]): string => {
     const authorNames: string[] = [];
 
     if (typeof id === 'string') {

@@ -1,17 +1,18 @@
 import React from 'react';
 import styles from './CourseCard.module.css';
 import Button from '../../../../common/Button/Button';
-import type { TCourse } from '../../../../types';
 import getCourseDuration from '../../../../helpers/getCourseDuration';
 import formatCreationDate from '../../../../helpers/formatCreationDate';
 import formatAuthorsByIds from '../../../../helpers/formatAuthorsByIds';
-import { CourseContext, TCourseContext } from '../../../../context/courseContext';
-import { AuthorContext, TAuthorContext } from '../../../../context/authorContext';
 import { Link } from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '../../../../app/hooks';
+import { deleteCourseAsync, selectCourseById } from '../../courseSlice';
+import { selectAuthorEntities } from '../../../Authors/authorSlice';
 
-function CourseCard(course: TCourse) {
-    const { deleteCourse } = React.useContext(CourseContext) as TCourseContext;
-    const { authors } = React.useContext(AuthorContext) as TAuthorContext;
+function CourseCard(props: { id: string }) {
+    const dispatch = useAppDispatch();
+    const course = useAppSelector((state) => selectCourseById(state, props.id));
+    const authors = useAppSelector(selectAuthorEntities);
 
     return (
         <div className={styles.root}>
@@ -22,7 +23,7 @@ function CourseCard(course: TCourse) {
                     variant={'secondary'}
                     text={'Delete course'}
                     onClick={() => {
-                        deleteCourse(course.id);
+                        dispatch(deleteCourseAsync(course.id));
                     }}
                 />
             </div>
@@ -33,13 +34,20 @@ function CourseCard(course: TCourse) {
                     </p>
                 )}
 
+                {course.duration && (
+                    <p>
+                        <strong>Duration:</strong> {getCourseDuration(course.duration)}
+                    </p>
+                )}
+
+                {course.creationDate && (
+                    <p>
+                        <strong>Created:</strong> {formatCreationDate(course.creationDate)}
+                    </p>
+                )}
                 <p>
-                    <strong>Duration:</strong> {getCourseDuration(course.duration)}
+                    <Link to={`/courses/${course.id}`}>Show course</Link>
                 </p>
-                <p>
-                    <strong>Created:</strong> {formatCreationDate(course.creationDate)}
-                </p>
-                <Link to={`/courses/${course.id}`}>Show course</Link>
             </div>
         </div>
     );

@@ -1,23 +1,9 @@
 import { createSelector } from 'reselect';
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import type { RootState } from '../../app/store';
+import type { ITodo, ITodoEntity, ITodosState } from '../../types';
 
-export interface TTodo {
-    id: number;
-    title: string;
-    completed: boolean;
-}
-
-export interface TTodoEntity {
-    [key: string]: TTodo;
-}
-
-export interface TTodosState {
-    entities: TTodoEntity;
-    status: 'idle' | 'loading' | 'failed';
-}
-
-const initialState: TTodosState = {
+const initialState: ITodosState = {
     entities: {},
     status: 'idle'
 };
@@ -27,12 +13,10 @@ const initialState: TTodosState = {
 // will call the thunk with the `dispatch` function as the first argument. Async
 // code can then be executed and other actions can be dispatched. Thunks are
 // typically used to make async requests.
-export const fetchTodosAsync = createAsyncThunk('counter/fetchCount', async (): Promise<TTodoEntity> => {
+export const fetchTodosAsync = createAsyncThunk('todos/fetchTodos', async (): Promise<ITodo[]> => {
     const response = await fetch('https://jsonplaceholder.typicode.com/todos');
     // The value we return becomes the `fulfilled` action payload
-    const result = await response.json();
-    const todos = result as TTodo[]; // @todo validate response
-    return Object.fromEntries(todos.map((todo) => [todo.id, todo]));
+    return await response.json();
 });
 
 export const todosSlice = createSlice({
@@ -41,20 +25,18 @@ export const todosSlice = createSlice({
     reducers: {
         addTodo: (state, action: PayloadAction<string>) => {
             const nextId = Object.keys(state.entities).pop();
-            console.log(nextId);
             if (nextId) {
                 const id = parseInt(nextId, 10) + 1;
-                const newTodo: TTodo = { id, title: action.payload || '', completed: false };
-                console.log(newTodo);
+                const newTodo: ITodo = { id, title: action.payload || '', completed: false };
                 state.entities[id] = newTodo;
             }
         },
-        toggleTodo: (state, action: PayloadAction<TTodo>) => {
+        toggleTodo: (state, action: PayloadAction<ITodo>) => {
             const todo = action.payload;
             const changes = { completed: !todo.completed };
             state.entities[todo.id] = { ...todo, ...changes };
         },
-        deleteTodo: (state, action: PayloadAction<TTodo>) => {
+        deleteTodo: (state, action: PayloadAction<ITodo>) => {
             delete state.entities[action.payload.id];
         }
     },
@@ -67,7 +49,8 @@ export const todosSlice = createSlice({
             })
             .addCase(fetchTodosAsync.fulfilled, (state, action) => {
                 state.status = 'idle';
-                state.entities = { ...state.entities, ...action.payload };
+                const newEntities: ITodoEntity = Object.fromEntries(action.payload.map((todo) => [todo.id, todo]));
+                state.entities = { ...state.entities, ...newEntities };
             })
             .addCase(fetchTodosAsync.rejected, (state) => {
                 state.status = 'failed';
@@ -77,7 +60,7 @@ export const todosSlice = createSlice({
 
 export const { addTodo, toggleTodo, deleteTodo } = todosSlice.actions;
 
-const selectTodoEntities = (state: TTodosState) => state.entities;
+const selectTodoEntities = (state: ITodosState) => state.entities;
 
 export const selectTodos = createSelector(selectTodoEntities, (entities) => Object.values(entities));
 
@@ -90,4 +73,4 @@ export const selectTodoIdsReversed = createSelector(selectTodoIds, (selectTodoId
 
 export const selectLastTodoId = createSelector(selectTodoIds, (ids) => ids.pop());
 
-export default todosSlice.reducer;
+export default todosSlice;

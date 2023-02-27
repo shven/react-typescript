@@ -1,9 +1,9 @@
 // file with mocked data
-import type { TAuthor, TCourse } from './types';
+import type { IAuthor, ICourse } from './types';
 
 export const apiUrl = process.env.REACT_APP_API_SERVER_URL;
 
-export const mockedCoursesList: TCourse[] = [
+export const mockedCoursesList: ICourse[] = [
     {
         id: 'de5aaa59-90f5-4dbc-b8a9-aaf205c551ba',
         title: 'JavaScript',
@@ -28,7 +28,7 @@ export const mockedCoursesList: TCourse[] = [
     }
 ];
 
-export const mockedAuthorsList: TAuthor[] = [
+export const mockedAuthorsList: IAuthor[] = [
     {
         id: '27cc3006-e93a-4748-8ca8-73d06aa93b6d',
         name: 'Vasiliy Dobkin'

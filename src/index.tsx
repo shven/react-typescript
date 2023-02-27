@@ -16,7 +16,7 @@ import UserPage from './pages/UserPage';
 import { Provider } from 'react-redux';
 import { store } from './app/store';
 import TodosPage from './pages/TodosPage';
-import TodoList from './features/Todos/TodoList';
+import TodoList from './components/Todos/TodoList';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 

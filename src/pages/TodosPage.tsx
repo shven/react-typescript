@@ -1,6 +1,6 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import TodoAdd from '../features/Todos/TodoAdd';
+import TodoAdd from '../components/Todos/TodoAdd';
 
 export default () => {
     return (

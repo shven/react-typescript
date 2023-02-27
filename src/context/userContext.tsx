@@ -1,5 +1,5 @@
 import * as React from 'react';
-import type { TUser } from '../types';
+import type { IUser } from '../types';
 import { useEffect } from 'react';
 import { apiUrl } from '../constants';
 
@@ -8,16 +8,16 @@ interface Props {
 }
 
 export type TUserContext = {
-    user?: TUser;
+    user?: IUser;
     isLoggedIn: boolean;
     saveToken: (token: string) => void;
     logout: () => void;
 };
 
 export const UserContext = React.createContext<TUserContext | null>(null);
-const initialUser: TUser = { email: '', name: '' };
+const initialUser: IUser = { email: '', name: '' };
 const UserProvider: React.FC<Props> = ({ children }) => {
-    const [user, setUser] = React.useState<TUser>(initialUser);
+    const [user, setUser] = React.useState<IUser>(initialUser);
     const [token, setToken] = React.useState('');
     const [isLoggedIn, setIsLoggedIn] = React.useState(false);
     const saveToken = (token: string) => {
@@ -42,13 +42,11 @@ const UserProvider: React.FC<Props> = ({ children }) => {
     // Store token in localstorage when updated
     useEffect(() => {
         if (token.length > 0) {
-            console.log('fetch users/me');
             fetch(`${apiUrl}/users/me`, {
                 headers: { Authorization: token }
             })
                 .then((response) => response.json())
                 .then((result) => {
-                    console.log(result);
                     if (result.successful && result.result.email && result.result.name) {
                         setUser({ email: result.result.email, name: result.result.name });
                         setIsLoggedIn(true);
