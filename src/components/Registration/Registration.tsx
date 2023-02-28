@@ -1,54 +1,39 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { apiUrl } from '../../constants';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { userRegisterAsync } from '../../context/userSlice';
 
 export default () => {
-    const navigate = useNavigate();
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const dispatch = useAppDispatch();
+    const navigate = useNavigate();
+    const errors = useAppSelector((state) => state.user.errors);
 
+    useEffect(() => {
+        errors?.forEach((error) => {
+            toast.error(error, {
+                position: 'top-center',
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: 'light'
+            });
+        });
+    }, [errors]);
     async function handleFormSubmit(e: React.SyntheticEvent) {
         e.preventDefault();
 
-        const newUser = {
-            name,
-            password,
-            email
-        };
+        await dispatch(userRegisterAsync({ name, password, email }));
 
-        const response = await fetch(`${apiUrl}/register`, {
-            method: 'POST',
-            body: JSON.stringify(newUser),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        });
-
-        if (!response) {
-            console.error('error connecting to backend');
-        }
-
-        const result = await response.json();
-
-        if (result.errors) {
-            result?.errors.forEach((error: string) => {
-                toast.error(error, {
-                    position: 'bottom-right',
-                    autoClose: 5000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: 'light'
-                });
-            });
-        }
-
-        if (result.successful) {
+        if (!errors) {
+            alert('Registered, please login');
             navigate('/login');
         }
     }

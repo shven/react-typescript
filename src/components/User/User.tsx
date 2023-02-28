@@ -1,9 +1,11 @@
 import React from 'react';
 import 'react-toastify/dist/ReactToastify.css';
-import { TUserContext, UserContext } from '../../context/userContext';
+import { useAppSelector } from '../../app/hooks';
+import { userGetUser, userIsLoggedIn } from '../../context/userSlice';
 
 export default () => {
-    const { user, isLoggedIn } = React.useContext(UserContext) as TUserContext;
+    const isLoggedIn = useAppSelector(userIsLoggedIn);
+    const user = useAppSelector(userGetUser);
 
     return (
         <div>

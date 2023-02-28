@@ -1,6 +1,9 @@
 export interface IUser {
     email: string;
     name: string;
+    role: string;
+    id: string;
+    password: string;
 }
 
 export interface IAuthor {
@@ -72,4 +75,16 @@ export interface ITodoEntity {
 export interface ITodosState extends IState {
     entities: ITodoEntity;
     status: 'idle' | 'loading' | 'failed';
+}
+
+export interface IUserMeResponse extends IResponse {
+    result?: IUser;
+}
+
+export interface IUserLoginResponse extends IResponse {
+    result?: string;
+}
+
+export interface IUserRegisterResponse extends IResponse {
+    result?: string;
 }

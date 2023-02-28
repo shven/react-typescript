@@ -4,11 +4,14 @@ import Logo from './components/Logo/Logo';
 import Navigation from '../Navigation/Navigation';
 import { Link } from 'react-router-dom';
 import Welcome from '../Welcome/Welcome';
-import { TUserContext, UserContext } from '../../context/userContext';
+import { logout, userGetUser, userIsLoggedIn } from '../../context/userSlice';
 import Button from '../../common/Button/Button';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
 
 function Header() {
-    const { user, isLoggedIn, logout } = React.useContext(UserContext) as TUserContext;
+    const isLoggedIn = useAppSelector(userIsLoggedIn);
+    const user = useAppSelector(userGetUser);
+    const dispatch = useAppDispatch();
 
     return (
         <header className={styles.header}>
@@ -16,21 +19,13 @@ function Header() {
             <Navigation />
             {isLoggedIn && (
                 <div className={styles.header__actions}>
-                    {isLoggedIn && user?.name && <Welcome name={user?.name} />}
-                    <Button variant={'secondary'} text={'Logout'} onClick={() => logout()} />
+                    {isLoggedIn && user?.name && user?.role && <Welcome name={user?.name} role={user?.role} />}
+                    <Button variant={'secondary'} text={'Logout'} onClick={() => dispatch(logout())} />
                 </div>
             )}
             {!isLoggedIn && (
                 <div className={styles.header__actions}>
                     <Link to='/login'>Login</Link> / <Link to='/registration'>Register</Link>
-                    {isLoggedIn && user?.name && <Welcome name={user?.name} />}
-                    {/*<Button*/}
-                    {/*    variant={'secondary'}*/}
-                    {/*    text={'Logout'}*/}
-                    {/*    onClick={() => {*/}
-                    {/*        alert('Logged out');*/}
-                    {/*    }}*/}
-                    {/*/>*/}
                 </div>
             )}
         </header>

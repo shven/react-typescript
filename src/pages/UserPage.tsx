@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
 import User from '../components/User/User';
 import { Link, useNavigate } from 'react-router-dom';
-import { TUserContext, UserContext } from '../context/userContext';
+import { useAppSelector } from '../app/hooks';
+import { userIsLoggedIn } from '../context/userSlice';
 
 export default () => {
     const navigate = useNavigate();
-    const { isLoggedIn } = React.useContext(UserContext) as TUserContext;
+    const isLoggedIn = useAppSelector(userIsLoggedIn);
 
     useEffect(() => {
         if (!isLoggedIn) {

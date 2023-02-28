@@ -1,35 +1,27 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { TUserContext, UserContext } from '../../context/userContext';
-import { apiUrl } from '../../constants';
+import { useAppDispatch, useAppSelector } from '../../app/hooks';
+import { userIsLoggedIn, userLoginAsync } from '../../context/userSlice';
 
 export default () => {
-    const { saveToken } = React.useContext(UserContext) as TUserContext;
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const dispatch = useAppDispatch();
+    const errors = useAppSelector((state) => state.user.errors);
+    const isLoggedIn = useAppSelector(userIsLoggedIn);
+    const navigate = useNavigate();
 
-    async function handleFormSubmit(e: React.SyntheticEvent) {
-        e.preventDefault();
+    useEffect(() => {
+        if (isLoggedIn) {
+            navigate('/user');
+        }
+    }, [isLoggedIn]);
 
-        const newUser = {
-            name,
-            password,
-            email
-        };
-
-        const response = await fetch(`${apiUrl}/login`, {
-            method: 'POST',
-            body: JSON.stringify(newUser),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        });
-
-        const result = await response.json();
-        result?.errors?.forEach((error: string) => {
+    useEffect(() => {
+        errors?.forEach((error) => {
             toast.error(error, {
                 position: 'top-center',
                 autoClose: 5000,
@@ -41,20 +33,11 @@ export default () => {
                 theme: 'light'
             });
         });
-        if (result.successful) {
-            saveToken(result.result);
-        } else if (!result.submit && !result.errors) {
-            toast.error('Make sure the name, email and password fields match the ones used while registering', {
-                position: 'top-center',
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: 'light'
-            });
-        }
+    }, [errors]);
+    async function handleFormSubmit(e: React.SyntheticEvent) {
+        e.preventDefault();
+
+        await dispatch(userLoginAsync({ name, password, email }));
     }
 
     return (
@@ -106,6 +89,8 @@ export default () => {
 
             <p>
                 No account? <Link to={`/registration`}>Please register</Link>
+                <br />
+                <small>Use a login with an admin role to manage courses</small>
             </p>
             <ToastContainer />
         </form>

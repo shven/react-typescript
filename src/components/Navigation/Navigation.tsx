@@ -1,10 +1,11 @@
 import React from 'react';
 import styles from './Navigation.module.css';
 import { Link } from 'react-router-dom';
-import { TUserContext, UserContext } from '../../context/userContext';
+import { useAppSelector } from '../../app/hooks';
+import { userIsLoggedIn } from '../../context/userSlice';
 
 function Navigation() {
-    const { isLoggedIn } = React.useContext(UserContext) as TUserContext;
+    const isLoggedIn = useAppSelector(userIsLoggedIn);
 
     return (
         <nav className={styles.navigation}>

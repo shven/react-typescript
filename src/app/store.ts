@@ -3,9 +3,11 @@ import { counterReduxSlice } from '../components/CounterRedux/counterReduxSlice'
 import todosSlice from '../components/Todos/todosSlice';
 import { courseSlice } from '../components/Courses/courseSlice';
 import { authorSlice } from '../components/Authors/authorSlice';
+import { userSlice } from '../context/userSlice';
 
 export const store = configureStore({
     reducer: {
+        user: userSlice.reducer,
         counter: counterReduxSlice.reducer,
         todos: todosSlice.reducer,
         courses: courseSlice.reducer,
