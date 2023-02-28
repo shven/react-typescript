@@ -29,7 +29,7 @@ export default () => {
         });
 
         const result = await response.json();
-        result?.errors.forEach((error: string) => {
+        result?.errors?.forEach((error: string) => {
             toast.error(error, {
                 position: 'top-center',
                 autoClose: 5000,
