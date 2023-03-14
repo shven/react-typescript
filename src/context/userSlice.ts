@@ -116,7 +116,6 @@ export const userSlice = createSlice({
                         state.errors = ['Make sure the name, email and password fields match the ones used while registering'];
                     }
                 }
-                console.log(action.payload);
             })
             .addCase(userLoginAsync.rejected, (state) => {
                 state.status = 'failed';

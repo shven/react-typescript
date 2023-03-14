@@ -5,10 +5,8 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import CounterPage from './pages/CounterPage';
-import CoursesPage from './pages/CoursesPage';
 import CoursesDetailPage from './pages/Courses/CoursesDetail';
 import CoursesAllPage from './pages/Courses/CoursesAllPage';
-import CoursesAdd from './pages/Courses/CoursesAddPage';
 import CoursesAddAuthorPage from './pages/Courses/CoursesAddAuthorPage';
 import RegisterPage from './pages/RegistrationPage';
 import LoginPage from './pages/LoginPage';
@@ -17,6 +15,9 @@ import { Provider } from 'react-redux';
 import { store } from './app/store';
 import TodosPage from './pages/TodosPage';
 import TodoList from './components/Todos/TodoList';
+import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+import CoursesAddPage from './pages/Courses/CoursesAddPage';
+import NotAllowedPage from './pages/NotAllowedPage';
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 
@@ -26,21 +27,26 @@ root.render(
             <BrowserRouter>
                 <Routes>
                     <Route path='/' element={<App />}>
-                        <Route path='registration' element={<RegisterPage />} />
-                        <Route path='login' element={<LoginPage />} />
-                        <Route path='user' element={<UserPage />} />
+                        {/** Private routes for normal users */}
+                        <Route path='/' element={<PrivateRoute roles={['user', 'admin']} />}>
+                            <Route path='user' element={<UserPage />} />
+                            <Route path='courses' element={<CoursesAllPage />} />
+                            <Route path='/courses/:pageId' element={<CoursesDetailPage />} />
+                        </Route>
 
+                        {/** Private routes for admins */}
+                        <Route path='/' element={<PrivateRoute roles={['admin']} />}>
+                            <Route path='courses/add-author' element={<CoursesAddAuthorPage />} />
+                            <Route path='courses/add' element={<CoursesAddPage />} />
+                        </Route>
+
+                        {/** Public routes */}
+                        <Route path='registration' element={<RegisterPage />} />
+                        <Route path='not-allowed' element={<NotAllowedPage />} />
+                        <Route path='login' element={<LoginPage />} />
                         <Route path='todos' element={<TodosPage />}>
                             <Route index element={<TodoList />} />
                         </Route>
-
-                        <Route path='courses' element={<CoursesPage />}>
-                            <Route index element={<CoursesAllPage />} />
-                            <Route path='add' element={<CoursesAdd />} />
-                            <Route path='add-author' element={<CoursesAddAuthorPage />} />
-                            <Route path=':pageId' element={<CoursesDetailPage />} />
-                        </Route>
-
                         <Route path='counter' element={<CounterPage />} />
                         <Route path='*' element={<Navigate to='/' />} />
                     </Route>

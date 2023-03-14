@@ -4,6 +4,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { userIsLoggedIn, userLoginAsync } from '../../context/userSlice';
+import Button from '../../common/Button/Button';
 
 export default () => {
     const [name, setName] = useState('');
@@ -86,6 +87,24 @@ export default () => {
             </p>
 
             <button type='submit'>Login</button>
+            <Button
+                variant={'transparent'}
+                text={'User'}
+                onClick={() => {
+                    setName('test');
+                    setEmail('test@email.com');
+                    setPassword('test123');
+                }}
+            />
+            <Button
+                variant={'transparent'}
+                text={'Admin'}
+                onClick={() => {
+                    setName('admin');
+                    setEmail('admin@email.com');
+                    setPassword('admin123');
+                }}
+            />
 
             <p>
                 No account? <Link to={`/registration`}>Please register</Link>

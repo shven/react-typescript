@@ -2,7 +2,7 @@ import type { MouseEventHandler } from 'react';
 
 interface TButton {
     text: string;
-    variant?: 'primary' | 'secondary';
+    variant?: 'primary' | 'secondary' | 'transparent';
     onClick: MouseEventHandler<HTMLButtonElement>;
 }
 

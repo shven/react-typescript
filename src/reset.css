@@ -60,6 +60,12 @@ button {
     transition: all 0.15s ease-out;    overflow: visible;
 }
 
+button.transparent {
+    background: transparent;
+    border-color: transparent;
+    color: black;
+}
+
 button.secondary {
     background: var(--color-secondary);
     border: 1px solid var(--color-secondary);
@@ -80,6 +86,13 @@ button.secondary:not(:disabled):active,
 button.secondary:not(:disabled):focus,
 button.secondary:not(:disabled):hover {
     background: var(--color-secondary-light);
+}
+
+button.transparent:not(:disabled):active,
+button.transparent:not(:disabled):focus,
+button.transparent:not(:disabled):hover {
+    background: transparent;
+    color: blue;
 }
 
 section {

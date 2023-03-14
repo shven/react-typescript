@@ -10,7 +10,6 @@ const forbiddenSymbols = /[@#$%^&]/;
 
 function CreateCourse() {
     const dispatch = useAppDispatch();
-    //const navigate = useNavigate();
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [creationDate, setCreationDate] = useState('');

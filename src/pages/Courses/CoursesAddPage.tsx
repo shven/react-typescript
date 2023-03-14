@@ -5,19 +5,17 @@ import CreateCourse from '../../components/CreateCourse/CreateCourse';
 
 export default () => {
     return (
-        <>
-            <section>
-                <div className={styles.columns}>
-                    <div className={styles.column}>
-                        <h2>Create course</h2>
-                        <CreateCourse />
-                    </div>
-                    <div className={styles.column}>
-                        <h2>Create new author</h2>
-                        <CreateAuthor />
-                    </div>
+        <section>
+            <div className={styles.columns}>
+                <div className={styles.column}>
+                    <h2>Create course</h2>
+                    <CreateCourse />
                 </div>
-            </section>
-        </>
+                <div className={styles.column}>
+                    <h2>Create new author</h2>
+                    <CreateAuthor />
+                </div>
+            </div>
+        </section>
     );
 };
