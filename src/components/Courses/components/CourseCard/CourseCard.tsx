@@ -8,10 +8,12 @@ import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../../app/hooks';
 import { deleteCourseAsync, selectCourseById } from '../../courseSlice';
 import { selectAuthorEntities } from '../../../Authors/authorSlice';
+import { userGetUser } from '../../../../context/userSlice';
 
 function CourseCard(props: { id: string }) {
     const dispatch = useAppDispatch();
     const course = useAppSelector((state) => selectCourseById(state, props.id));
+    const user = useAppSelector(userGetUser);
     const authors = useAppSelector(selectAuthorEntities);
 
     return (
@@ -19,13 +21,15 @@ function CourseCard(props: { id: string }) {
             <div className={styles.content}>
                 <h3>{course.title}</h3>
                 <p>{course.description}</p>
-                <Button
-                    variant={'secondary'}
-                    text={'Delete course'}
-                    onClick={() => {
-                        dispatch(deleteCourseAsync(course.id));
-                    }}
-                />
+                {user?.role === 'admin' && (
+                    <Button
+                        variant={'secondary'}
+                        text={'Delete course'}
+                        onClick={() => {
+                            dispatch(deleteCourseAsync(course.id));
+                        }}
+                    />
+                )}
             </div>
             <div className={styles.aside}>
                 {course.authors && (
