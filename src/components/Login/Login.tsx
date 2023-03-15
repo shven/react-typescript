@@ -17,7 +17,7 @@ export default () => {
 
     useEffect(() => {
         if (isLoggedIn) {
-            navigate('/user');
+            navigate('/courses');
         }
     }, [isLoggedIn]);
 
