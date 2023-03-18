@@ -6,7 +6,7 @@ function Welcome(props: { name: string; role: string }) {
     return (
         <div className={styles.root}>
             <Link to={'/user'} className={styles.link}>
-                {props.name} ({props.role})
+                Welcome {props.name} ({props.role})
             </Link>
         </div>
     );

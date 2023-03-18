@@ -3,7 +3,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { apiUrl } from '../constants';
 import type { RootState } from '../app/store';
 
-interface IUserState extends IState {
+export interface IUserState extends IState {
     user?: IUser;
     isLoggedIn: boolean;
     token: string;

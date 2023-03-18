@@ -12,7 +12,7 @@ import RegisterPage from './pages/RegistrationPage';
 import LoginPage from './pages/LoginPage';
 import UserPage from './pages/UserPage';
 import { Provider } from 'react-redux';
-import { store } from './app/store';
+import { setupStore } from './app/store';
 import TodosPage from './pages/TodosPage';
 import TodoList from './components/Todos/TodoList';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
@@ -23,7 +23,7 @@ const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 
 root.render(
     <React.StrictMode>
-        <Provider store={store}>
+        <Provider store={setupStore()}>
             <BrowserRouter>
                 <Routes>
                     <Route path='/' element={<App />}>

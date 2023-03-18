@@ -17,10 +17,10 @@ function CourseCard(props: { id: string }) {
     const authors = useAppSelector(selectAuthorEntities);
 
     return (
-        <div className={styles.root}>
+        <div className={styles.root} data-testid={`course-card`}>
             <div className={styles.content}>
-                <h3>{course.title}</h3>
-                <p>{course.description}</p>
+                <h3 data-testid={`course-title`}>{course.title}</h3>
+                <p data-testid={`course-description`}>{course.description}</p>
                 {user?.role === 'admin' && (
                     <Button
                         variant={'secondary'}
@@ -34,19 +34,19 @@ function CourseCard(props: { id: string }) {
             <div className={styles.aside}>
                 {course.authors && (
                     <p>
-                        <strong>Authors:</strong> {formatAuthorsByIds(course.authors, authors)}
+                        <strong>Authors:</strong> <span data-testid={`course-authors`}>{formatAuthorsByIds(course.authors, authors)}</span>
                     </p>
                 )}
 
                 {course.duration && (
                     <p>
-                        <strong>Duration:</strong> {getCourseDuration(course.duration)}
+                        <strong>Duration:</strong> <span data-testid={`course-duration`}>{getCourseDuration(course.duration)}</span>
                     </p>
                 )}
 
                 {course.creationDate && (
                     <p>
-                        <strong>Created:</strong> {formatCreationDate(course.creationDate)}
+                        <strong>Created:</strong> <span data-testid={`course-creation-date`}>{formatCreationDate(course.creationDate)}</span>
                     </p>
                 )}
                 <p>
