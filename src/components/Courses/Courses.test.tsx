@@ -1,5 +1,5 @@
 import React from 'react';
-import { screen } from '@testing-library/react';
+import { fireEvent, screen } from '@testing-library/react';
 import { renderWithProviders } from '../../utils/testUtils';
 import Courses from './Courses';
 import { mockedCoursesState, mockedLoggedInAdminUserState, mockedLoggedInUserState } from '../../constants';
@@ -35,4 +35,25 @@ test('Courses link is not visible for users with a user role', () => {
     // Use queryByTestId instead of getByTestId to return null instead of an error for non-existing element
     const el = screen.queryByTestId('courses-add-course-link');
     expect(el).toBeNull();
+});
+
+test('CourseForm should be showed after a click on a button "Add new course".', async () => {
+    renderWithProviders(<Courses />, {
+        preloadedState: {
+            courses: mockedCoursesState,
+            user: mockedLoggedInAdminUserState
+        }
+    });
+    const el = screen.getByTestId('courses-add-course-link');
+    const formEl = screen.getByTestId('create-course-form');
+
+    fireEvent.change(
+        el,
+        new MouseEvent('click', {
+            bubbles: true,
+            cancelable: true
+        })
+    );
+
+    expect(formEl).toBeInTheDocument();
 });

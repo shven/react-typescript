@@ -52,7 +52,7 @@ function CreateCourse() {
     };
 
     return (
-        <form onSubmit={handleFormSubmit}>
+        <form data-testid={`create-course-form`} onSubmit={handleFormSubmit}>
             <p>
                 <label>
                     Title
