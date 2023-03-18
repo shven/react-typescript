@@ -61,6 +61,19 @@ export const mockedLoggedInUserState: IUserState = {
     status: 'idle'
 };
 
+export const mockedLoggedInAdminUserState: IUserState = {
+    user: {
+        name: 'Admin',
+        email: 'john@doe.com',
+        password: 'test123',
+        role: 'admin',
+        id: 'b534bb35-460f-4d6c-870f-43983fd10c66'
+    },
+    token: '123456789',
+    isLoggedIn: true,
+    status: 'idle'
+};
+
 export const mockedCoursesState: ICoursesState = {
     entities: mockedCoursesList,
     status: 'idle'
