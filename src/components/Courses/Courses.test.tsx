@@ -2,7 +2,9 @@ import React from 'react';
 import { fireEvent, screen } from '@testing-library/react';
 import { renderWithProviders } from '../../utils/testUtils';
 import Courses from './Courses';
-import { mockedCoursesState, mockedLoggedInAdminUserState, mockedLoggedInUserState } from '../../constants';
+import { mockedCoursesState, mockedLoggedInAdminUserState, mockedLoggedInUserState, mockedNewCourse } from '../../constants';
+import reducer, { addCourse } from './courseSlice';
+import type { ICoursesState } from '../../types';
 
 test('Courses should display amount of CourseCard equal length of courses array', () => {
     renderWithProviders(<Courses />, {
@@ -56,4 +58,20 @@ test('CourseForm should be showed after a click on a button "Add new course".', 
     );
 
     expect(formEl).toBeInTheDocument();
+});
+
+test('Courses reducer should return the initial state', () => {
+    expect(reducer(undefined, { type: undefined })).toEqual({ entities: {}, errors: [], status: 'idle' });
+});
+
+test('Courses reducer should handle add course and returns new state', () => {
+    const previousState: ICoursesState = { entities: {}, errors: [], status: 'idle' };
+
+    expect(reducer(previousState, addCourse(mockedNewCourse))).toEqual({
+        entities: {
+            'b5630fdd-7bf7-4d39-b75a-2b5906fd0916': mockedNewCourse
+        },
+        errors: [],
+        status: 'idle'
+    });
 });
